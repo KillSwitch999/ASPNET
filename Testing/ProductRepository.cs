@@ -12,12 +12,17 @@ namespace Testing
 
         public ProductRepository(IDbConnection conn)
         {
-            _conn = _conn;
+            _conn = conn;
         }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return _conn.Query<Product>("SELECT * FROM Products;");
+            return _conn.Query<Product>("SELECT * FROM products;");
+        }
+
+        public Product GetProduct(int id)
+        {
+            return _conn.QuerySingle<Product>("SELECT * FROM products WHERE PRODUCTID = @id", new { id = id });
         }
     }
 }

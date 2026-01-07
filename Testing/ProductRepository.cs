@@ -9,7 +9,6 @@ namespace Testing
     public class ProductRepository : IProductRepository
     {
         private readonly IDbConnection _conn;
-
         public ProductRepository(IDbConnection conn)
         {
             _conn = conn;
@@ -22,7 +21,7 @@ namespace Testing
 
         public Product GetProduct(int id)
         {
-            return _conn.QuerySingle<Product>("SELECT * FROM products WHERE PRODUCTID = @id", new { id = id });
+            return _conn.QuerySingleOrDefault<Product>("SELECT * FROM products WHERE ProductID = @id", new { id });
         }
 
         public void UpdateProduct(Product product)

@@ -20,8 +20,10 @@ namespace Testing.Controllers
 
         public IActionResult ViewProduct(int id)
         {
-            var product = repo.GetProduct(id);
-            return View(product);
+            var products = repo.GetProduct(id);
+            if (products == null)
+                return View("ProductNotFound");
+            return View(products);
         }
 
         public IActionResult UpdateProduct(int id)
